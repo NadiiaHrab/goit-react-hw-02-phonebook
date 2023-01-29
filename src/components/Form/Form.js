@@ -39,7 +39,6 @@ class Form extends Component {
 
     return ( 
    <>
-    <h2 className=''>Phonebook</h2>
         
 <form onSubmit={this.handleSubmit}>
   <label htmlFor={this.nanoidIdName}>Name
