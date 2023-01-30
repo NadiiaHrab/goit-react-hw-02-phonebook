@@ -1,0 +1,11 @@
+.inputFilter {
+margin-bottom: 10px;
+width: 200px;
+height: 20px;
+border-radius: 10px;
+border: 1px solid orange;
+}
+
+.labelFilter {
+    margin-bottom: 5px;
+}

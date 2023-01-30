@@ -1,12 +1,13 @@
 .form {
-    border: 2px solid rgba(14, 13, 13, 0.2);
+    border: 1px solid rgb(167, 165, 165);
     border-radius: 5px;
     padding: 20px;
     width: 240px;
     height: 140px;
+    margin-bottom: 20px;
 }
 .labele {
-color: cadetblue;
+color: rgb(66, 123, 125);
 }
 .input {
     margin-bottom: 10px;
