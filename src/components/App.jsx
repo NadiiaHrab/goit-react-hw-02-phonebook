@@ -1,9 +1,11 @@
 
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import Container from "./Container";
 import Form from "./Form";
 import ContactList from "./ContactList";
 import Filter from "./Filter";
+import css from "./App.module.css";
 
 
 class App extends Component  {
@@ -18,12 +20,8 @@ class App extends Component  {
    filter: '',
   }
 
-//    formSubmitHandler = data => {
-// console.log(data);
-//   }
-
-  addContacts = (name, number) => {
-    // const { contacts } = this.state;
+  addContacts = ({name, number}) => {
+    console.log({name, number});
     const newContact = {
       id: nanoid(),
       name,
@@ -35,25 +33,53 @@ class App extends Component  {
     }))
   }
 
-  
-  deleteContact = contactId => {
-    this.setState(({ contacts }) => ({
-      contacts: contacts.filter(contact => contact.id !== contactId),
+  deleteContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));
   };
-  
+
   changeFilter = e => {
-    this.setState({ filter: e.currentTarget.value})
+    this.setState({ filter: e.currentTarget.value })
   }
 
   getVisibleContact = () => {
     const {contacts, filter } = this.state;
-    const normalizedFilter = filter.toLowerCase;
+    const normalizedFilter = filter.toLowerCase();
 
     return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter));
+    contact.name.toLowerCase().includes(normalizedFilter));
     
   }
+
+  render() {
+    const { filter } = this.state;
+    const visibleContact = this.getVisibleContact();
+    
+    return (
+      <>
+        <Container>
+      <h2 className={css.title}>Phonebook</h2>
+        <Form onSubmit={this.addContacts} />
+  
+        <h2 className={css.title}>Contacts</h2>
+        <Filter value={filter} onChange={this.changeFilter} />
+
+        <ContactList
+          contacts={visibleContact}
+          onDeleteContact={this.deleteContact}
+          />
+          
+        </Container>  
+</>
+)}};
+
+export default App;
+
+
+
+
+
 
   // getCompletedContacts = () => {
   //   const { contacts } = this.state;
@@ -61,30 +87,12 @@ class App extends Component  {
   //   return contacts.reduce(
   //     (contact, total) => (contact.completed ? total + 1 : total), 0);
   // }
-   
-  render() {
-    const { filter } = this.state;
-    const visibleContact = this.getVisibleContact();
-    // const totalContactsCount = contacts.length;
+
+
+  // const totalContactsCount = contacts.length;
     // const completedContactsCount = this.getCompletedContacts()
 
-    return (
-      <>
-      <h2 className=''>Phonebook</h2>
-        <Form onSubmit={this.addContacts} />
-        
-        <h2 className=''>Contacts</h2>
-        <Filter value={filter} onChange={this.changeFilter} />
 
-        <ContactList
-          contacts={visibleContact}
-          onDeleteContact={this.deleteContacts}
-        />  
-</>
-) 
-
-}
-
-};
-
-export default App;
+  //    formSubmitHandler = data => {
+   // console.log(data);
+   //   }
