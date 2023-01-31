@@ -20,6 +20,7 @@ class App extends Component  {
    filter: '',
   }
 
+  // Додає новий контакт
   addContacts = ({name, number}) => {
     console.log({name, number});
     const newContact = {
@@ -28,28 +29,39 @@ class App extends Component  {
       number,
     
     } 
+
+    // знаходить збіг по імені, виводимо повідомлення
+    const matchName = this.state.contacts.find(contact => contact.name === name);
+
+    if (matchName) {
+      alert(`${name} is already in contacts`)
+      return;
+    }
+    // додаємо контак до попередніх(розпилюємо)
     this.setState((prevState) => ({
       contacts: [newContact, ...prevState.contacts],
     }))
   }
 
+  // Видаляє контакт
   deleteContact = id => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));
   };
 
+  // слідкує за полем фільтрації і пише у state(filter)
   changeFilter = e => {
     this.setState({ filter: e.currentTarget.value })
   }
 
+  // фільтрує і повертає результат фільтра
   getVisibleContact = () => {
     const {contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
-
-    return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalizedFilter));
     
+    return contacts.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedFilter));  
   }
 
   render() {
@@ -94,5 +106,5 @@ export default App;
 
 
   //    formSubmitHandler = data => {
-   // console.log(data);
-   //   }
+  // console.log(data);
+  //   }
