@@ -10,6 +10,7 @@
 .labele {
     /* color: rgb(66, 123, 125); */
     color: black;
+    font-size: 14px;
 
 }
 
@@ -26,7 +27,7 @@
 .btn {
     display: inline-block;
     min-width: 60px;
-    height: 30px;
+    height: 25px;
     background-color: white;
     border-radius: 5px;
     border: 1px solid gray;
